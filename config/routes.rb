@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # Routes for the Delivery resource:
+  devise_for :users
 
   # CREATE
   post("/insert_delivery", { :controller => "deliveries", :action => "create" })
@@ -16,11 +16,12 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_delivery/:path_id", { :controller => "deliveries", :action => "destroy" })
 
+
   #------------------------------
 
-  # Routes for the User resource:
+  # # Routes for the User resource:
 
-  # CREATE
+  # # CREATE
   post("/insert_user", { :controller => "users", :action => "create" })
           
   # READ
@@ -30,15 +31,15 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_user/:path_id", { :controller => "users", :action => "update" })
+  get("/modify_user/:path_id", { :controller => "users", :action => "edit" })
   
   # DELETE
   get("/delete_user/:path_id", { :controller => "users", :action => "destroy" })
-
-  #------------------------------
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+    root "deliveries#index"
 end

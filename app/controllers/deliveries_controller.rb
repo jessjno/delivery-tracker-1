@@ -1,4 +1,5 @@
 class DeliveriesController < ApplicationController
+  before_action :authenticate_user!
   def index
     matching_deliveries = Delivery.all
 
@@ -23,10 +24,11 @@ class DeliveriesController < ApplicationController
     the_delivery.supposed_to_arrive_on = params.fetch("query_supposed_to_arrive_on")
     the_delivery.details = params.fetch("query_details")
     the_delivery.user_id = params.fetch("query_user_id")
+    the_delivery.arrived = params.fetch("query_arrived", true)
 
     if the_delivery.valid?
       the_delivery.save
-      redirect_to("/deliveries", { :notice => "Delivery created successfully." })
+      redirect_to("/deliveries", { :notice => "Added to list" })
     else
       redirect_to("/deliveries", { :alert => the_delivery.errors.full_messages.to_sentence })
     end

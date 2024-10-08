@@ -30,10 +30,15 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+  def edit
     the_id = params.fetch("path_id")
-    the_user = User.where({ :id => the_id }).at(0)
+    @user = User.where({ :id => the_id }).at(0)
+  end 
 
+  def update
+    # the_id = params.fetch("path_id")
+    # the_user = User.where({ :id => the_id }).at(0)
+    
     the_user.email = params.fetch("query_email")
     the_user.password = params.fetch("query_password")
 
